@@ -153,7 +153,6 @@ def _scan_channel(channel, data, analyzed, gps, block, fthresh,
             series[3], correlate=correlation, gps=gps, dt=block.dt)
     elif model is not None:
         LOGGER.info(' -- Modeling {}'.format(channel.name))
-        print('THIS SHOULD BE THE AUX SPECTRO', series[5]) #FIXME
         modeling = omega.model(series[5], model)
         channel.save_loudest_tile_features(
             series[3], model=modeling, gps=gps, dt=block.dt)
@@ -379,7 +378,6 @@ def main(args=None):
         primary_spectro = omega.scan(
             gps, primary.channel, primary_spectro.astype('float64'), 
             fftlength, resample=primary.resample)[5]
-        print('THIS IS THE PRIMARY SPECTROGRAM', primary_spectro) #FIXME
         model = primary.ml_model
         hoft_features = omega.extract_features(primary_spectro, model)
         model = [model, hoft_features]

@@ -316,7 +316,6 @@ def extract_features(spectro, ml_model=None):
     features: `giant table`
         Similarity features from image 
     """
-    print('THIS IS THE ML MODEL', ml_model) 
 
     image_data_for_si = pd.DataFrame()
 
@@ -339,7 +338,6 @@ def extract_features(spectro, ml_model=None):
     return features[0]
 
 def model(spectro, hoft_features):
-    print('THIS IS THE HOFT FEATURES', hoft_features) #FIXME
     if hoft_features:
         ml_model = hoft_features[0]
         hoft_features = hoft_features[1]
@@ -347,8 +345,7 @@ def model(spectro, hoft_features):
         ml_model = None
         hoft_features = []
     xoft_features = extract_features(spectro, ml_model)
-    out = 1 - cosine(xoft_features, hoft_features) 
-    print('THIS SHOULD BE CORR OUT (changed to 1-cos()):', out) #FIXME
+    out = 1 - cosine(xoft_features, hoft_features)
     return out
 
 
