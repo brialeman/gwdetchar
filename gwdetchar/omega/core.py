@@ -303,7 +303,7 @@ def raw_read_rgb(spectro, scale, resolution=0.3):
     return image_data_r, image_data_g, image_data_b
 
 
-def extract_features(spectro, ml_model=None):
+def extract_features(spectro, ml_model=None, channel=None, ifo=None):
     """ Extract similarity features from rgb values
 
     Parameters
@@ -321,6 +321,8 @@ def extract_features(spectro, ml_model=None):
 
     list_of_scales = [0.5, 1.0, 2.0, 4.0]
 
+    print(spectro)
+
     for scale in list_of_scales:  
     
         image_data_r, image_data_g, image_data_b = raw_read_rgb(spectro, scale, resolution=0.3)
@@ -328,7 +330,13 @@ def extract_features(spectro, ml_model=None):
         stacked_rgb = np.dstack([image_data_r[..., 0], image_data_g[..., 1], image_data_b[..., 2]])
 
         # store in df
-        image_data_for_si['{}.png'.format(scale)] = [stacked_rgb]
+        image_data_for_si['{}_{}_spectro_{}.png'.format(
+            ifo,
+            channel,
+            scale,
+        )] = [stacked_rgb]
+
+        print(image_data_for_si)
     
     features = label_glitches.get_multiview_feature_space(image_data=image_data_for_si,
                                        semantic_model_name='{0}'.format(ml_model),

@@ -379,7 +379,8 @@ def main(args=None):
             gps, primary.channel, primary_spectro.astype('float64'), 
             fftlength, resample=primary.resample)[5]
         model = primary.ml_model
-        hoft_features = omega.extract_features(primary_spectro, model)
+        print(name, ifo)
+        hoft_features = omega.extract_features(primary_spectro, model, channel=name, ifo=ifo)
         model = [model, hoft_features]
         htmlv['modeled'] = True
         htmlv['primary'] = name
