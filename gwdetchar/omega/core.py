@@ -313,8 +313,8 @@ def extract_features(spectro, ml_model=None):
 
     Returns
     -------
-    features: `giant table`
-        Similarity features from image 
+    features: `gravityspy.table`
+        Similarity features from image s
     """
 
     image_data_for_si = pd.DataFrame()
